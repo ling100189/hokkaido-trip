@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2027 北海道旅行｜費用試算</title>
+<style>
+:root{--bg:#fff6f8;--card:#fff;--ink:#1f1f1f;--muted:#7b6870;--line:#f0dce2;--blue:#e85d86;--blue2:#fff0f4;--green:#1f1f1f;--purple:#e87525;--orange:#e87525}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",Arial,sans-serif}
+.wrap{max-width:1180px;margin:auto;padding:28px 18px 60px}.hero h1{margin:0 0 5px;font-size:30px}.hero p{margin:0;color:var(--muted)}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}.tab{border:1px solid var(--line);background:#fff;border-radius:16px;padding:15px;cursor:pointer;text-align:left}.tab.active{border:2px solid #e85d86;background:var(--blue2)}.date{font-size:18px;font-weight:900}.sub{margin-top:5px;color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:1.55fr .85fr;gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 4px 15px rgba(15,23,42,.05)}
+h2{margin:0 0 5px;font-size:22px}.meta{color:var(--muted);font-size:13px;margin-bottom:20px}.section{margin-top:25px}.section:first-child{margin-top:0}.section-title{font-size:21px;font-weight:900;padding-bottom:9px;border-bottom:2px solid var(--ink);margin-bottom:5px}.sub-title{font-size:18px;font-weight:900;margin-top:18px;padding:10px 0 7px}.flight-group-note{padding:0 0 7px;border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:15px;border-top:1px solid var(--line);padding:14px 4px}.left{display:flex;gap:10px}.left input[type=checkbox]{margin-top:5px;width:18px;height:18px}.name{font-size:17px;font-weight:800}.detail{font-size:14px;color:var(--muted);margin-top:4px;line-height:1.55}.price{font-size:18px;font-weight:900;white-space:nowrap}.tag{display:inline-block;background:#f1f5f9;border-radius:999px;padding:3px 8px;font-size:12px;margin-top:5px;color:#475569}
+.currency{font-size:12px;color:var(--muted);font-weight:600}.jpy{color:#e87525}.ntd{color:#1f1f1f}
+.ski-block{border:1px solid var(--line);border-radius:14px;margin:10px 0;padding:15px;background:#fcfdff}.ski-head{font-size:18px;font-weight:900;margin-bottom:10px}
+.day-control{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.day-control label{font-weight:700}.day-input{width:90px;padding:9px 10px;border:1px solid #e7c6d0;border-radius:9px;font-size:16px;text-align:center}.day-unit{color:var(--muted);font-size:14px}.calc-line{margin-top:9px;color:var(--muted);font-size:13px}.calc-line b{color:var(--purple);font-size:15px}
+.gear-option{display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:9px;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}.gear-option:first-of-type{border-top:0}.gear-option input{width:18px;height:18px}.gear-days{font-weight:800;font-size:16px}.gear-price{margin-left:auto;text-align:right;font-weight:900;color:#e87525}
+.summary{position:sticky;top:15px}.rate{background:#f8fafc;border:1px solid var(--line);padding:12px;border-radius:12px;margin:12px 0 16px}.rate b{font-size:17px}.big{font-size:31px;font-weight:950;margin:8px 0}.per{font-weight:900;color:#1f1f1f}.breakdown{border-top:1px solid var(--line);margin-top:16px;padding-top:10px}.breakdown div{display:flex;justify-content:space-between;padding:6px 0}.small{font-size:13px;color:var(--muted);line-height:1.55}.notice{background:#fffbeb;border:1px solid #fde68a;color:#92400e;padding:10px 12px;border-radius:10px;font-size:12px;margin-top:15px}.reset{margin-top:13px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;cursor:pointer}
+@media(max-width:850px){
+  .wrap{padding:18px 14px 40px}
+  .grid{grid-template-columns:1fr}
+  .summary{position:static;order:2}
+  .tabs{grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
+  .tab{padding:13px 12px;border-radius:14px}
+  .date{font-size:16px}
+  .sub{font-size:12px}
+  .card{padding:16px;border-radius:16px}
+}
+@media(max-width:600px){
+  body{font-size:16px;-webkit-text-size-adjust:100%}
+  .wrap{padding:12px 10px 32px}
+  .hero h1{font-size:24px;line-height:1.25}
+  .hero p{font-size:13px;line-height:1.5}
+  .tabs{grid-template-columns:1fr 1fr;gap:7px;margin:14px 0}
+  .tab{min-height:76px;padding:11px 10px;border-radius:13px}
+  .date{font-size:15px;line-height:1.25}
+  .sub{margin-top:4px;font-size:11px;line-height:1.35}
+  .grid{gap:10px}
+  .card{padding:14px;border-radius:15px}
+  h2{font-size:20px}
+  .meta{font-size:12px;margin-bottom:14px}
+  .section{margin-top:20px}
+  .section-title{font-size:19px;padding-bottom:7px}
+  .sub-title{font-size:16px;margin-top:14px;padding:8px 0 6px}
+  .row{grid-template-columns:minmax(0,1fr) auto;gap:9px;padding:12px 2px}
+  .left{gap:8px;min-width:0}
+  .left input[type=checkbox]{width:20px;height:20px;flex:0 0 auto}
+  .name{font-size:15px;line-height:1.35}
+  .detail{font-size:12px;line-height:1.5;word-break:break-word}
+  .price{font-size:15px;text-align:right}
+  .currency{font-size:10px}
+  .tag{font-size:10px;padding:2px 6px}
+  .ski-block{padding:12px;margin:8px 0;border-radius:12px}
+  .ski-head{font-size:16px}
+  .day-control{gap:7px}
+  .day-input{width:78px;padding:8px;font-size:16px}
+  .gear-option{grid-template-columns:22px minmax(0,1fr) auto;gap:7px;padding:11px 0}
+  .gear-days{font-size:14px}
+  .gear-price{font-size:14px}
+  .calc-line{font-size:11px;line-height:1.5}
+  .notice{font-size:11px;line-height:1.5}
+  .member-chip{font-size:12px;padding:6px 9px}
+  .member-day-row{font-size:13px}
+  .big{font-size:27px}
+  .per{font-size:14px}
+  .breakdown div{font-size:14px;padding:5px 0}
+  .small{font-size:11px}
+  .reset{width:100%;padding:11px;margin-top:12px}
+}
+@media(max-width:390px){
+  .wrap{padding-left:8px;padding-right:8px}
+  .tabs{gap:6px}
+  .tab{padding:10px 8px}
+  .date{font-size:14px}
+  .sub{font-size:10px}
+  .card{padding:12px}
+  .row{gap:6px}
+  .name{font-size:14px}
+  .price{font-size:14px}
+}
+.members{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.member-chip{display:inline-flex;align-items:center;gap:5px;background:#fff0f4;border:1px solid #f0cbd6;border-radius:999px;padding:6px 10px;font-size:13px;cursor:pointer}.member-chip input{width:17px;height:17px;margin:0}.member-label{font-size:13px;color:var(--muted);margin-top:12px}.member-days{display:grid;gap:8px;margin-top:10px}.member-day-row{display:flex;align-items:center;gap:7px}.member-day-row span:first-child{min-width:58px;font-weight:700}.member-day-input{width:70px}.people-summary{border-top:1px solid var(--line);margin-top:12px;padding-top:5px}.person-total{display:flex;justify-content:space-between;align-items:center;padding:9px 0 2px;font-size:16px}.person-total b{font-size:18px}.person-detail{font-size:11px;color:var(--muted);padding-bottom:7px;border-bottom:1px solid var(--line)}
+
+
+.people-card{margin-bottom:18px}
+.people-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}
+.person-name-field{display:flex;align-items:center;gap:8px}
+.person-name-field span{font-weight:800;white-space:nowrap}
+.person-name-field input{width:100%;min-width:0;border:1px solid #e7c6d0;border-radius:10px;padding:10px 11px;background:#fff;font-size:16px;color:var(--ink)}
+.person-name-field input:focus{outline:none;border-color:#e85d86}
+@media(max-width:600px){.people-card{margin-bottom:10px}.people-list{grid-template-columns:1fr;gap:9px}.person-name-field span{width:58px;flex:0 0 58px}.person-name-field input{min-height:44px;font-size:16px}}
+
+.day-setting{display:flex;align-items:center;gap:8px;margin:10px 0}
+.day-setting .day-input{width:76px}
+.day-setting .day-unit{font-weight:700}
+@media(max-width:600px){
+  .day-setting .day-input{min-height:42px;font-size:16px}
+}
+
+.gear-person-list{display:grid;gap:10px;margin-top:10px}
+.gear-person-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.gear-person-name{font-weight:800;min-width:70px}
+.gear-day-options{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.gear-day-options button{border:1px solid #e7c6d0;background:#fff;border-radius:999px;padding:8px 12px;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
+.gear-day-options button.selected{background:#fff0f4;border-color:#e85d86;color:#e85d86}
+@media(max-width:600px){
+  .gear-person-row{display:block}
+  .gear-person-name{margin-bottom:7px}
+  .gear-day-options{justify-content:flex-start}
+  .gear-day-options button{min-height:40px;padding:8px 13px}
+}
+
+.helmet-person-list{display:grid;gap:10px;margin-top:10px}
+.helmet-person-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.helmet-person-name{font-weight:800;min-width:70px}
+.helmet-day-options{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.helmet-day-options button{border:1px solid #e7c6d0;background:#fff;border-radius:999px;padding:8px 12px;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
+.helmet-day-options button.selected{background:#fff0f4;border-color:#e85d86;color:#e85d86}
+@media(max-width:600px){
+  .helmet-person-row{display:block}
+  .helmet-person-name{margin-bottom:7px}
+  .helmet-day-options{justify-content:flex-start}
+  .helmet-day-options button{min-height:40px;padding:8px 13px}
+}
+
+.member-day-options{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.member-day-options button{border:1px solid #e7c6d0;background:#fff;border-radius:999px;padding:8px 12px;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
+.member-day-options button.selected{background:#fff0f4;border-color:#e85d86;color:#e85d86}
+@media(max-width:600px){.member-day-options{justify-content:flex-start;margin-top:7px}.member-day-options button{min-height:40px;padding:8px 13px}}
+
+/* 三個滑雪項目的每人選項統一：姓名 + 不用 + 1日 + 2日 + 3日 */
+.member-day-row,
+.gear-person-row,
+.helmet-person-row{
+  display:grid !important;
+  grid-template-columns:72px repeat(4,82px) !important;
+  align-items:center !important;
+  gap:8px !important;
+  padding:9px 0 !important;
+}
+.member-day-row>span,
+.gear-person-name,
+.helmet-person-name{
+  min-width:0 !important;
+  width:auto !important;
+  flex:none !important;
+  white-space:nowrap !important;
+}
+.member-day-options,
+.gear-day-options,
+.helmet-day-options{
+  display:contents !important;
+}
+.member-day-options button,
+.gear-day-options button,
+.helmet-day-options button{
+  width:100% !important;
+  min-width:0 !important;
+  min-height:40px !important;
+  padding:7px 3px !important;
+  white-space:nowrap !important;
+  font-size:14px !important;
+}
+
+@media(max-width:600px){
+  .member-day-row,
+  .gear-person-row,
+  .helmet-person-row{
+    grid-template-columns:72px repeat(4, minmax(0,1fr)) !important;
+    gap:5px !important;
+  }
+}
+
+/* 最終滑雪區塊版面 */
+.ski-head{display:block !important;line-height:1.35 !important}
+.ski-head .ski-price-line{display:block !important;margin-top:3px !important}
+.ski-head .ski-price-line .jpy{
+  color:var(--orange) !important;
+  font-size:inherit !important;
+  font-weight:800 !important;
+}
+.gear-person-list,.helmet-person-list{
+  display:grid !important;
+  gap:8px !important;
+  margin-top:10px !important;
+}
+.gear-person-row,.helmet-person-row{
+  border-bottom:none !important;
+  padding:9px 0 !important;
+}
+@media(max-width:600px){
+  .ski-head{line-height:1.35 !important}
+  .ski-head .ski-price-line{margin-top:3px !important}
+  .gear-person-list,.helmet-person-list{gap:8px !important}
+  .gear-person-row,.helmet-person-row{
+    border-bottom:none !important;
+    padding:9px 0 !important;
+  }
+}
+
+.coach-section-title{font-weight:800;margin:12px 0 7px}
+.coach-choice-list{display:flex;gap:8px;flex-wrap:wrap}
+.coach-choice-list button,.coach-member{border:1px solid #e7c6d0;background:#fff;border-radius:999px;padding:9px 13px;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
+.coach-choice-list button.selected,.coach-member.selected{background:#fff0f4;border-color:#e85d86;color:#e85d86}
+.coach-member-list{display:flex;gap:8px;flex-wrap:wrap}
+.coach-price-line{margin-top:10px;font-size:14px}
+.coach-price-line b{color:var(--orange)}
+.coach-day{margin-top:9px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.coach-day{margin-top:9px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.coach-day-toggle{width:100%;border:0;background:#fff;display:flex;align-items:center;gap:8px;padding:11px 12px;font-weight:800;cursor:pointer;text-align:left}
+.coach-day-toggle span{flex:1}.coach-day-toggle b{color:var(--orange);font-size:13px;text-align:right}.coach-day-toggle i{font-style:normal;color:var(--blue);font-weight:900;width:18px;text-align:center}.coach-day-body{padding:0 12px 12px;border-top:1px solid var(--line)}
+@media(max-width:600px){.coach-choice-list button,.coach-member{min-height:40px;padding:8px 12px}.coach-day-toggle{padding:10px}.coach-day-toggle b{font-size:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero"><h1>2027 北海道旅行｜費用試算</h1></div>
+<div id="tabs" class="tabs"></div>
+<div id="people" class="card people-card"></div>
+<div class="grid"><main id="details" class="card"></main><aside id="summary" class="card summary"></aside></div>
+</div>
+<script>
+const packages=[{"title": "① 2/16~2/21｜6天｜3人", "items": [{"section": "住宿", "date": "札幌", "name": "札幌王子飯店", "detail": "", "time": "", "price": 4292, "unit": "/間晚", "note": "*1間*4晚 (無早餐，早餐每人額外+722)"}, {"section": "住宿", "date": "函館", "name": "函館JR旅館", "detail": "", "time": "", "price": 9743, "unit": "/間晚", "note": "*1間*1晚 (無早餐，早餐每人額外+722)"}, {"section": "滑雪", "date": "來回巴士+7小纜車", "name": "來回巴士+7小纜車", "detail": "", "time": "", "price": 11000, "unit": "/日人", "note": ""}, {"section": "滑雪", "date": "裝備", "name": "單板+雪鞋", "detail": "1日", "time": "", "price": 9200, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "單板+雪鞋", "detail": "2日", "time": "", "price": 17400, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "單板+雪鞋", "detail": "3日", "time": "", "price": 25600, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "安全帽", "detail": "1日", "time": "", "price": 3300, "unit": "／人", "note": ""}, {"section": "機票", "type": "single", "group": "桃園 → 札幌千歲", "date": "2027-02-16", "name": "桃園→札幌千歲", "detail": "中華航空 CI130", "time": "08:35 TPE → 13:20 CTS", "price": 13434, "unit": "／人", "note": ""}, {"section": "機票", "type": "choice", "group": "札幌千株 → 函館", "date": "2027-02-20", "name": "札幌千株→函館", "option": "日本航空 JAL 2745", "time": "10:10 → 10:50", "price": 3686, "unit": "／人", "note": ""}, {"section": "機票", "type": "choice", "group": "札幌千株 → 函館", "date": "2027-02-20", "name": "札幌千株→函館", "option": "日本航空 JAL 2749", "time": "14:10 → 14:50", "price": 2609, "unit": "／人", "note": ""}, {"section": "機票", "type": "single", "group": "函館 → 桃園", "date": "2027-02-21", "name": "函館→桃園", "detail": "星宇航空 JX861", "time": "18:00 HKD → 21:40 TPE", "price": 11866, "unit": "／人", "note": ""}], "days": 6, "people": 3, "route": "札幌＋函館", "roomDesc": "札幌王子飯店 1間×4晚；函館JR旅館 1間×1晚"}, {"title": "② 2/17~2/21｜5天｜3人", "items": [{"section": "住宿", "date": "札幌", "name": "札幌王子飯店", "detail": "", "time": "", "price": 4388, "unit": "/間晚", "note": "*1間*4晚 (無早餐，早餐每人額外+722)"}, {"section": "滑雪", "date": "來回巴士+7小纜車", "name": "來回巴士+7小纜車", "detail": "", "time": "", "price": 11000, "unit": "/日人", "note": ""}, {"section": "滑雪", "date": "裝備", "name": "單板+雪鞋", "detail": "1日", "time": "", "price": 9200, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "單板+雪鞋", "detail": "2日", "time": "", "price": 17400, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "單板+雪鞋", "detail": "3日", "time": "", "price": 25600, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "安全帽", "detail": "1日", "time": "", "price": 3300, "unit": "／人", "note": ""}, {"section": "機票", "type": "choice", "group": "札幌來回機票", "option": "方案 1", "date": "2027-02-17／2月21日", "name": "桃園→札幌千歲", "detail": "中華航空 CI130", "time": "08:35 TPE → 13:20 CTS", "return_detail": "中華航空 CI2131", "return_time": "10:40 CTS → 14:15 TPE", "price": 24124, "unit": "／人", "note": ""}, {"section": "機票", "type": "choice", "group": "札幌來回機票", "option": "方案 2", "date": "2027-02-17／2月21日", "name": "桃園→札幌千歲", "detail": "中華航空 CI130", "time": "08:35 TPE → 13:20 CTS", "return_detail": "中華航空 CI131", "return_time": "14:40 CTS → 18:15 TPE", "price": 24181, "unit": "／人", "note": ""}], "days": 5, "people": 3, "route": "札幌", "roomDesc": "札幌王子飯店 1間×4晚"}, {"title": "③ 3/09~3/14｜6天｜4人", "items": [{"section": "住宿", "date": "札幌", "name": "札幌王子飯店", "detail": "", "time": "", "price": 2611, "unit": "/間晚", "note": "*2間*4晚 (無早餐，早餐每人額外+722)"}, {"section": "住宿", "date": "函館", "name": "函館JR旅館", "detail": "", "time": "", "price": 3132, "unit": "/間晚", "note": "*2間*1晚 (無早餐，早餐每人額外+722)"}, {"section": "滑雪", "date": "來回巴士+7小纜車", "name": "來回巴士+7小纜車", "detail": "", "time": "", "price": 11000, "unit": "/日人", "note": ""}, {"section": "滑雪", "date": "裝備", "name": "單板+雪鞋", "detail": "1日", "time": "", "price": 9200, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "單板+雪鞋", "detail": "2日", "time": "", "price": 17400, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "單板+雪鞋", "detail": "3日", "time": "", "price": 25600, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "安全帽", "detail": "1日", "time": "", "price": 3300, "unit": "／人", "note": ""}, {"section": "機票", "type": "single", "group": "桃園 → 札幌千歲", "date": "2027-03-09", "name": "桃園→札幌千歲", "detail": "中華航空 CI130", "time": "08:35 TPE → 13:20 CTS", "price": 13434, "unit": "／人", "note": ""}, {"section": "機票", "type": "choice", "group": "札幌千株 → 函館", "date": "2027-03-13", "name": "札幌千株→函館", "option": "日本航空 JAL 2749", "time": "12:45 → 13:25", "price": 1728, "unit": "／人", "note": ""}, {"section": "機票", "type": "single", "group": "函館 → 桃園", "date": "2027-03-14", "name": "函館→桃園", "detail": "星宇航空 JX861", "time": "18:00 HKD → 21:40 TPE", "price": 11866, "unit": "／人", "note": ""}], "days": 6, "people": 4, "route": "札幌＋函館", "roomDesc": "札幌王子飯店 2間×4晚；函館JR旅館 2間×1晚"}, {"title": "④ 3/10~3/14｜5天｜4人", "items": [{"section": "住宿", "date": "札幌", "name": "札幌王子飯店", "detail": "", "time": "", "price": 2947, "unit": "/間晚", "note": "*2間*4晚"}, {"section": "滑雪", "date": "來回巴士+7小纜車", "name": "來回巴士+7小纜車", "detail": "", "time": "", "price": 11000, "unit": "/日人", "note": ""}, {"section": "滑雪", "date": "裝備", "name": "單板+雪鞋", "detail": "1日", "time": "", "price": 9200, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "單板+雪鞋", "detail": "2日", "time": "", "price": 17400, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "單板+雪鞋", "detail": "3日", "time": "", "price": 25600, "unit": "／人", "note": ""}, {"section": "滑雪", "date": "", "name": "安全帽", "detail": "1日", "time": "", "price": 3300, "unit": "／人", "note": ""}, {"section": "機票", "type": "choice", "group": "札幌來回機票", "option": "方案 1", "date": "2027-03-10／3月14日", "name": "桃園→札幌千歲", "detail": "中華航空 CI130", "time": "08:35 TPE → 13:20 CTS", "return_detail": "中華航空 CI2131", "return_time": "10:40 CTS → 14:15 TPE", "price": 24124, "unit": "／人", "note": ""}, {"section": "機票", "type": "choice", "group": "札幌來回機票", "option": "方案 2", "date": "2027-03-10／3月14日", "name": "桃園→札幌千歲", "detail": "中華航空 CI130", "time": "08:35 TPE → 13:20 CTS", "return_detail": "中華航空 CI131", "return_time": "14:40 CTS → 18:15 TPE", "price": 24181, "unit": "／人", "note": ""}], "days": 5, "people": 4, "route": "札幌", "roomDesc": "札幌王子飯店 2間×4晚"}];
+const JPY_RATE=0.20;
+let active=0;
+let coachOpen=[true,false,false];
+
+const state=packages.map(p=>({
+  flights:{}, hotels:{},
+  members:Array.from({length:p.people},(_,i)=>({name:`人員 ${i+1}`,flight:true,busDays:0,gearDays:0,gear:false,helmetDays:0,helmet:false})),
+  ski:{gearDays:1,helmetDays:1}
+}));
+
+function nt(n){return "NT$ "+Math.round(n).toLocaleString("zh-TW")}
+function jp(n){return "¥ "+Math.round(n).toLocaleString("ja-JP")}
+
+function initFlights(){
+ packages.forEach((p,pi)=>{
+   const seen={};
+   p.items.forEach((it,idx)=>{
+     if(it.section!=="機票"||it.price==null)return;
+     const g=it.group||"航班方案";
+     if(seen[g]===undefined){state[pi].flights[g]=idx;seen[g]=idx}
+   });
+   p.items.forEach((it,idx)=>{
+     if(it.section==="住宿"&&it.price!=null)state[pi].hotels[idx]=true;
+   });
+ });
+}
+initFlights();
+
+function renderTabs(){
+ document.getElementById("tabs").innerHTML=packages.map((p,i)=>`
+ <button class="tab ${i===active?'active':''}" onclick="selectPackage(${i})">
+ <div class="date">${p.title.split('｜')[0]}</div><div class="sub">${p.days}天｜${p.people}人｜${p.route}</div></button>`).join("");
+}
+
+function flightNo(s){
+  if(!s)return "";
+  const m=s.match(/([A-Z]{2,4})\s*(\d{3,4})/);
+  return m ? `${m[1]}${m[2]}` : s;
+}
+
+function airlineName(s){
+  if(!s)return "";
+  if(s.includes("中華航空")) return "中華航空";
+  if(s.includes("日本航空")) return "日本航空";
+  if(s.includes("星宇航空")) return "星宇航空";
+  return "";
+}
+
+function normalizeGearDays(){
+  state.forEach(s=>s.members.forEach(m=>{
+    if(m.gearDays===undefined) m.gearDays=m.gear?1:0;
+  }));
+}
+normalizeGearDays();
+function normalizeHelmetDays(){
+  state.forEach(s=>s.members.forEach(m=>{
+    if(m.helmetDays===undefined) m.helmetDays=m.helmet?1:0;
+  }));
+}
+normalizeHelmetDays();
+function normalizeCoach(){
+  state.forEach(s=>{
+    const old=s.ski.coach;
+    if(old && Array.isArray(old.days)){
+      while(old.days.length<3) old.days.push({type:"none",duration:"full",members:[]});
+      old.days=old.days.slice(0,3); return;
+    }
+    s.ski.coach={days:[
+      old?{type:old.type||"none",duration:old.duration||"full",members:Array.isArray(old.members)?old.members:[]}:{type:"none",duration:"full",members:[]},
+      {type:"none",duration:"full",members:[]},{type:"none",duration:"full",members:[]}
+    ]};
+  });
+}
+normalizeCoach();
+
+
+function coachDayData(day){
+  const c=state[active].ski.coach;
+  if(!c.days)c.days=[{type:"none",duration:"full",members:[]},{type:"none",duration:"full",members:[]},{type:"none",duration:"full",members:[]}];
+  while(c.days.length<3)c.days.push({type:"none",duration:"full",members:[]});
+  return c.days[day];
+}
+function coachPrice(d){
+  const season=(active===0||active===1)?"旺季":"淡季";
+  if(d.type==="premium")return season==="旺季"?123000:113000;
+  return d.duration==="half"?(season==="旺季"?65000:55000):(season==="旺季"?88000:78000);
+}
+function coachTotal(d){
+  if(d.type==="none"||!d.members.length)return 0;
+  const n=d.members.length,base=coachPrice(d);
+  return base+(n>2?(n-2)*(d.duration==="half"?3000:5000):0);
+}
+function renderFlights(p){
+  const flights=p.items.map((it,idx)=>({it,idx})).filter(x=>x.it.section==="機票"&&x.it.price!=null);
+  if(!flights.length)return "";
+  let h=`<div class="section"><div class="section-title">機票</div>`;
+
+  [...new Set(flights.map(x=>x.it.group))].forEach(g=>{
+    const arr=flights.filter(x=>x.it.group===g);
+    h+=`<div class="sub-title">${g}</div>`;
+    if((active===0||active===2) && g==="札幌千株 → 函館"){
+      h+=`<div class="detail flight-group-note">來源：Trip.com；行李：小型個人行李 ×1、手提行李 ×1、託運行李 2件 × 23kg</div>`;
+    }
+
+    arr.forEach(({it,idx},n)=>{
+      const checked=state[active].flights[g]===idx;
+
+      if(it.type==="choice" && it.return_detail){
+        const outboundNo=flightNo(it.detail);
+        const returnNo=flightNo(it.return_detail);
+        const outboundAir=airlineName(it.detail);
+        const returnAir=airlineName(it.return_detail);
+        const combinedTitle = outboundAir && outboundAir===returnAir
+          ? `${outboundAir} ${outboundNo} ＋ ${returnNo}`
+          : `${outboundAir ? outboundAir+" " : ""}${outboundNo} ＋ ${returnAir ? returnAir+" " : ""}${returnNo}`;
+        h+=`<div class="row"><div class="left">
+        <input type="checkbox" ${checked?"checked":""} onchange="flightToggle('${encodeURIComponent(g)}',${idx},this.checked)">
+        <div>
+          <div class="name">${combinedTitle}</div>
+          <div class="detail">${it.date ? it.date.split("／")[0] : ""}</div>
+          <div class="detail">${it.time||""}</div>
+          <div class="detail">${it.date ? (it.date.split("／")[1] ? it.date.split("／")[1] : "") : ""}</div>
+          <div class="detail">${it.return_time||""}</div>
+          ${it.note?`<div class="detail">${it.note}</div>`:""}
+          <span class="tag">來回／人</span>
+        </div></div>
+        <div class="price">${nt(it.price)}<div class="currency">NT$／人</div></div></div>`;
+      } else {
+        const rawFlight = it.type==="choice" ? (it.option||it.detail||`方案 ${n+1}`) : (it.detail||it.name);
+        const title = `${airlineName(rawFlight) ? airlineName(rawFlight)+" " : ""}${flightNo(rawFlight)}`;
+        h+=`<div class="row"><div class="left">
+        <input type="checkbox" ${checked?"checked":""} onchange="flightToggle('${encodeURIComponent(g)}',${idx},this.checked)">
+        <div>
+          <div class="name">${title}</div>
+          ${it.date?`<div class="detail">${it.date}</div>`:""}
+          ${it.time?`<div class="detail">${it.time}</div>`:""}
+          ${it.note?`<div class="detail">${it.note}</div>`:""}
+          <span class="tag">${it.unit||"／人"}</span>
+        </div></div>
+        <div class="price">${nt(it.price)}<div class="currency">NT$／人</div></div></div>`;
+      }
+    });
+
+    if(arr.length>1)h+=`<div class="detail" style="margin-left:28px;color:#e87525">同一航段請擇一。</div>`;
+  });
+  return h+"</div>";
+}
+function renderHotels(p){
+ const hs=p.items.map((it,idx)=>({it,idx})).filter(x=>x.it.section==="住宿"&&x.it.price!=null);
+ if(!hs.length)return "";
+ let h=`<div class="section"><div class="section-title">住宿</div>`;
+ hs.forEach(({it,idx})=>{
+  h+=`<div class="row"><div class="left"><input type="checkbox" checked disabled>
+  <div><div class="name">${it.name}</div><div class="detail">${it.note||""}</div></div></div>
+  <div class="price">${nt(it.price)}<div class="currency">NT$／間／晚</div></div></div>`;
+ });
+ return h+"</div>";
+}
+
+function memberName(i){
+ const m=state[active].members[i];
+ return m ? m.name : `人員 ${i+1}`;
+}
+function renderPeopleNames(){
+  document.getElementById("people").innerHTML=
+    `<h2>旅客姓名</h2><div class="people-list">`+
+    state[active].members.map((m,i)=>`
+      <label class="person-name-field">
+        <span>人員 ${i+1}</span>
+        <input type="text" value="${String(m.name).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}"
+          placeholder="請輸入姓名"
+          onchange="setMemberName(${i},this.value)">
+      </label>
+    `).join("")+
+    `</div>`;
+}
+
+function memberChecks(kind){
+ return `<div class="members">`+state[active].members.map((m,i)=>`
+   <label class="member-chip"><input type="checkbox" ${m[kind]?'checked':''} onchange="setMember('${kind}',${i},this.checked)"><span>${m.name}</span></label>
+ `).join('')+`</div>`;
+}
+function memberDays(){return `<div class="member-days">`+state[active].members.map((m,i)=>{
+  const days=m.busDays||0;
+  return `<div class="member-day-row"><span>${m.name}</span><div class="member-day-options">
+    <button type="button" class="${days===0?'selected':''}" onclick="setMemberBusDays(${i},0)">不用</button>
+    <button type="button" class="${days===1?'selected':''}" onclick="setMemberBusDays(${i},1)">1日</button>
+    <button type="button" class="${days===2?'selected':''}" onclick="setMemberBusDays(${i},2)">2日</button>
+    <button type="button" class="${days===3?'selected':''}" onclick="setMemberBusDays(${i},3)">3日</button>
+  </div></div>`;
+}).join('')+`</div>`;}
+function renderSki(p){
+ const ski=p.items.filter(it=>it.section==="滑雪"&&it.price!=null);
+ const bus=ski.find(it=>it.name==="來回巴士+7小纜車");
+ const gear=ski.filter(it=>it.name==="單板+雪鞋" && ["1日","2日","3日"].includes(it.detail));
+ const helmet=ski.find(it=>it.name==="安全帽");
+ let h=`<div class="section"><div class="section-title">滑雪</div>`;
+ if(bus){
+  const totalDays=state[active].members.reduce((sum,m)=>sum+(m.busDays||0),0), per=bus.price;
+  h+=`<div class="ski-block"><div class="ski-head">來回巴士＋7小纜車<span class="ski-price-line"><span class="jpy">${jp(per)}／人／日</span></span></div><div class="detail">每個人可以設定不同滑雪天數</div>${memberDays()}<div class="calc-line">${jp(per)} × ${totalDays}人日 = <b>${jp(per*totalDays)}</b> <span class="ntd">（${nt(per*totalDays*JPY_RATE)}）</span></div></div>`;
+ }
+ gear.sort((a,b)=>parseInt(a.detail)-parseInt(b.detail));
+ const gearPrices={};
+ gear.forEach(it=>gearPrices[parseInt(it.detail,10)]=it.price);
+ h+=`<div class="ski-block"><div class="ski-head">單板＋雪鞋<span class="ski-price-line"><span class="jpy">${jp(gearPrices[1])}／1日 ｜ ${jp(gearPrices[2])}／2日 ｜ ${jp(gearPrices[3])}／3日</span></span></div><div class="detail">每個人可以設定不同租借天數</div>`;
+ h+=`<div class="gear-person-list">`;
+ state[active].members.forEach((m,i)=>{
+   const days=m.gearDays||0;
+   h+=`<div class="gear-person-row">
+     <div class="gear-person-name">${memberName(i)}</div>
+     <div class="gear-day-options">
+       <button type="button" class="${days===0?'selected':''}" onclick="setMemberGearDays(${i},0)">不用</button>
+       <button type="button" class="${days===1?'selected':''}" onclick="setMemberGearDays(${i},1)">1日</button>
+       <button type="button" class="${days===2?'selected':''}" onclick="setMemberGearDays(${i},2)">2日</button>
+       <button type="button" class="${days===3?'selected':''}" onclick="setMemberGearDays(${i},3)">3日</button>
+     </div>
+   </div>`;
+ });
+ h+=`</div>`;
+ let gearJPY=0;
+ state[active].members.forEach(m=>{
+   const d=m.gearDays||0;
+   if(d&&gearPrices[d]) gearJPY+=gearPrices[d];
+ });
+ h+=`<div class="calc-line">單板＋雪鞋合計 = <b>${jp(gearJPY)}</b> <span class="ntd">（${nt(gearJPY*JPY_RATE)}）</span></div></div>`;
+ if(helmet){
+  const per=helmet.price;
+  h+=`<div class="ski-block">
+    <div class="ski-head">安全帽<span class="ski-price-line"><span class="jpy">${jp(per)}／人／日</span></span></div>
+    <div class="detail">每個人可以設定不同租借天數</div>
+    <div class="helmet-person-list">`;
+  state[active].members.forEach((m,i)=>{
+    const days=m.helmetDays||0;
+    h+=`<div class="helmet-person-row">
+      <div class="helmet-person-name">${memberName(i)}</div>
+      <div class="helmet-day-options">
+        <button type="button" class="${days===0?'selected':''}" onclick="setMemberHelmetDays(${i},0)">不用</button>
+        <button type="button" class="${days===1?'selected':''}" onclick="setMemberHelmetDays(${i},1)">1日</button>
+        <button type="button" class="${days===2?'selected':''}" onclick="setMemberHelmetDays(${i},2)">2日</button>
+        <button type="button" class="${days===3?'selected':''}" onclick="setMemberHelmetDays(${i},3)">3日</button>
+      </div>
+    </div>`;
+  });
+  h+=`</div>`;
+  const helmetJPY=state[active].members.reduce((sum,m)=>sum+per*(m.helmetDays||0),0);
+  const helmetPeople=state[active].members.filter(m=>(m.helmetDays||0)>0).length;
+  h+=`<div class="calc-line">安全帽合計 = <b>${jp(helmetJPY)}</b> <span class="ntd">（${nt(helmetJPY*JPY_RATE)}）</span></div></div>`;
+}
+ h+=`<div class="notice">滑雪相關費用可以逐人設定，不需要滑雪或不需要租裝備的人不會被計入。</div></div>`;
+  const coach=state[active].ski.coach;
+  const coachSeason=(active===0||active===1)?"旺季":"淡季";
+  h+=`<div class="ski-block coach-block"><div class="ski-head">滑雪教練<span class="ski-price-line"><span class="jpy">${coachSeason}</span></span></div><div class="small" style="margin-top:4px">最多可設定 3 天，每天可分別選擇課程與上課人員。</div>`;
+  for(let day=0;day<3;day++){
+    const d=coachDayData(day),count=d.members.length,total=coachTotal(d);
+    const label=d.type==="none"?"不需要":(d.type==="premium"?"Premium 全天":(d.duration==="half"?"一般半天":"一般全天"));
+    h+=`<div class="coach-day ${coachOpen[day]?'is-open':''}"><button type="button" class="coach-day-toggle" onclick="toggleCoachDay(${day})"><span>第 ${day+1} 天</span><b>${label}${count?`｜${count}人｜${jp(total)}`:""}</b><i>${coachOpen[day]?'－':'＋'}</i></button><div class="coach-day-body" ${coachOpen[day]?'':'hidden'}><div class="coach-section-title">課程</div><div class="coach-choice-list"><button type="button" class="${d.type==='none'?'selected':''}" onclick="setCoachDayType(${day},'none')">不需要</button><button type="button" class="${d.type==='normal'?'selected':''}" onclick="setCoachDayType(${day},'normal')">一般私人課程</button><button type="button" class="${d.type==='premium'?'selected':''}" onclick="setCoachDayType(${day},'premium')">Premium 私人課程</button></div>`;
+    if(d.type!=="none"){
+      h+=`<div class="coach-section-title">課程時間</div><div class="coach-choice-list"><button type="button" class="${d.duration==='full'?'selected':''}" onclick="setCoachDayDuration(${day},'full')">全天 6 小時</button>`;
+      if(d.type==='normal')h+=`<button type="button" class="${d.duration==='half'?'selected':''}" onclick="setCoachDayDuration(${day},'half')">半天 3 小時</button>`;
+      h+=`</div><div class="coach-price-line">課程費用 <b>${jp(coachPrice(d))}</b> <span class="ntd">（${nt(coachPrice(d)*JPY_RATE)}）</span></div><div class="coach-section-title">上課人員</div><div class="coach-member-list">`;
+      state[active].members.forEach((m,i)=>{const checked=d.members.includes(i);h+=`<button type="button" class="coach-member ${checked?'selected':''}" onclick="toggleCoachDayMember(${day},${i})">${checked?'✓ ':''}${memberName(i)}</button>`;});
+      h+=`</div>`;
+      if(count){const share=total/count;h+=`<div class="coach-price-line">第 ${day+1} 天教練總費用 <b>${jp(total)}</b> <span class="ntd">（${nt(total*JPY_RATE)}）</span></div><div class="detail">上課 ${count} 人，每人分攤約 ${jp(share)}（${nt(share*JPY_RATE)}）</div>`;}else h+=`<div class="detail">請選擇上課人員</div>`;
+    }
+    h+=`</div></div>`;
+  }
+  h+=`</div>`;
+ return h;
+}
+function renderDetails(){
+ const p=packages[active];
+ document.getElementById("details").innerHTML=`<h2>${p.title}</h2><div class="meta">${p.roomDesc}</div>`+
+ renderFlights(p)+renderHotels(p)+renderSki(p)+
+ `<button class="reset" onclick="resetPackage()">恢復此方案預設選項</button>`;
+}
+
+function calc(){
+ const p=packages[active],people=p.people;
+ const perPerson=Array.from({length:people},()=>({flight:0,hotel:0,bus:0,gear:0,helmet:0,coach:0,total:0}));
+ p.items.forEach((it,idx)=>{
+   if(it.section==="機票"&&it.price!=null&&state[active].flights[it.group]===idx) state[active].members.forEach((m,i)=>{if(m.flight)perPerson[i].flight+=it.price;});
+   if(it.section==="住宿"&&it.price!=null){const hk=it.name.includes("函館"),rooms=active>=2?2:1,nights=hk?1:4,share=it.price*rooms*nights/people;perPerson.forEach(x=>x.hotel+=share);}
+ });
+ const ski=p.items.filter(it=>it.section==="滑雪"&&it.price!=null),bus=ski.find(it=>it.name==="來回巴士+7小纜車"),gear=ski.filter(it=>it.name==="單板+雪鞋"),helmet=ski.find(it=>it.name==="安全帽"),selectedGear=gear.find(it=>parseInt(it.detail,10)===state[active].ski.gearDays)||gear[0];
+ state[active].members.forEach((m,i)=>{if(bus)perPerson[i].bus=bus.price*(m.busDays||0)*JPY_RATE;const personalGear=gear.find(it=>parseInt(it.detail,10)===(m.gearDays||0));if(personalGear)perPerson[i].gear=personalGear.price*JPY_RATE;if(helmet&&(m.helmetDays||0)>0)perPerson[i].helmet=helmet.price*(m.helmetDays||0)*JPY_RATE;perPerson[i].total=perPerson[i].flight+perPerson[i].hotel+perPerson[i].bus+perPerson[i].gear+perPerson[i].helmet;});
+ const flight=perPerson.reduce((s,x)=>s+x.flight,0),hotel=perPerson.reduce((s,x)=>s+x.hotel,0),busJPY=bus?state[active].members.reduce((s,m)=>s+(m.busDays||0),0)*bus.price:0,gearJPY=state[active].members.reduce((s,m)=>{const g=gear.find(it=>parseInt(it.detail,10)===(m.gearDays||0));return s+(g?g.price:0)},0),helmetJPY=helmet?state[active].members.reduce((s,m)=>s+helmet.price*(m.helmetDays||0),0):0,skiJPY=busJPY+gearJPY+helmetJPY,total=perPerson.reduce((s,x)=>s+x.total,0);
+ 
+  const coach=state[active].ski.coach;
+  if(coach && Array.isArray(coach.days))coach.days.forEach(d=>{
+    if(d.type!=="none"&&d.members.length){const total=coachTotal(d),share=total/d.members.length*JPY_RATE;d.members.forEach(i=>{if(perPerson[i])perPerson[i].coach+=share;});}
+  });
+
+  perPerson.forEach(x=>{x.total=x.flight+x.hotel+x.bus+x.gear+x.helmet+x.coach;});
+  const coachNT=perPerson.reduce((s,x)=>s+x.coach,0);
+  const grandTotal=perPerson.reduce((s,x)=>s+x.total,0);
+
+return {flight,hotel,skiJPY,skiNT:skiJPY*JPY_RATE,coachNT,total:grandTotal,per:grandTotal/people,perPerson,busJPY,gearJPY,helmetJPY};
+}
+function renderSummary(){
+  const p=packages[active],c=calc();
+  document.getElementById("summary").innerHTML=`<h2>費用總結</h2><div class="rate">匯率<br><b>1 JPY = NT$0.20</b></div><div class="people-summary">${c.perPerson.map((x,i)=>`<div class="person-total"><span>${memberName(i)}</span><b>${nt(x.total)}</b></div><div class="person-detail">機票 ${nt(x.flight)}｜住宿 ${nt(x.hotel)}｜滑雪 ${nt(x.bus+x.gear+x.helmet)}｜教練 ${nt(x.coach)}</div>`).join('')}</div><div class="big">${nt(c.total)}</div><div class="per">全員合計</div><div class="breakdown"><div><span>機票</span><b>${nt(c.flight)}</b></div><div><span>住宿</span><b>${nt(c.hotel)}</b></div><div><span>滑雪換算</span><b>${nt(c.skiNT)}</b></div><div><span>滑雪教練</span><b>${nt(c.coachNT)}</b></div></div><div class="small" style="margin-top:10px">滑雪：巴士／纜車 ${jp(c.busJPY)}＋裝備 ${jp(c.gearJPY)}＋安全帽 ${jp(c.helmetJPY)}</div>`;
+}
+
+function selectPackage(i){active=i;renderTabs();renderPeopleNames();renderDetails();renderSummary()}
+function flightToggle(gEnc,idx,checked){
+ const g=decodeURIComponent(gEnc);
+ if(checked)state[active].flights[g]=idx;
+ else if(state[active].flights[g]===idx)delete state[active].flights[g];
+ renderDetails();renderSummary();
+}
+function setSki(key,val){
+ let n=parseInt(val,10);if(!Number.isFinite(n)||n<0)n=0;
+ state[active].ski[key]=n;renderDetails();renderSummary();
+}
+function setMember(kind,idx,checked){if(state[active].members[idx])state[active].members[idx][kind]=checked;renderDetails();renderSummary();}
+function setMemberName(idx,value){if(state[active].members[idx])state[active].members[idx].name=value.trim()||`人員 ${idx+1}`;renderPeopleNames();renderDetails();renderSummary();}
+function setMemberHelmetDays(idx,days){
+  if(state[active].members[idx]){
+    state[active].members[idx].helmetDays=parseInt(days,10)||0;
+    state[active].members[idx].helmet=!!state[active].members[idx].helmetDays;
+  }
+  renderDetails();renderSummary();
+}
+
+function setMemberGearDays(idx,days){
+  if(state[active].members[idx]){
+    state[active].members[idx].gearDays=parseInt(days,10)||0;
+    state[active].members[idx].gear=!!state[active].members[idx].gearDays;
+  }
+  renderDetails();renderSummary();
+}
+function toggleCoachDay(day){coachOpen[day]=!coachOpen[day];renderDetails();}
+function setCoachDayType(day,type){coachOpen[day]=true;const d=coachDayData(day);d.type=type;if(type==="premium")d.duration="full";if(type==="none")d.members=[];renderDetails();renderSummary();}
+function setCoachDayDuration(day,duration){coachOpen[day]=true;coachDayData(day).duration=duration;renderDetails();renderSummary();}
+function toggleCoachDayMember(day,idx){coachOpen[day]=true;const d=coachDayData(day),a=d.members,p=a.indexOf(idx);if(p>=0)a.splice(p,1);else a.push(idx);renderDetails();renderSummary();}
+function setMemberBusDays(idx,val){let n=parseInt(val,10);if(!Number.isFinite(n)||n<0)n=0;if(state[active].members[idx])state[active].members[idx].busDays=n;renderDetails();renderSummary();}
+function resetPackage(){
+ state[active].ski={gearDays:1,helmetDays:1,coach:{days:[{type:"none",duration:"full",members:[]},{type:"none",duration:"full",members:[]},{type:"none",duration:"full",members:[]}]}};
+ state[active].members=Array.from({length:packages[active].people},(_,i)=>({name:`人員 ${i+1}`,flight:true,busDays:1,gearDays:1,gear:true,helmetDays:1,helmet:true}));
+ state[active].flights={};
+ const p=packages[active],seen={};
+ p.items.forEach((it,idx)=>{
+  if(it.section==="機票"&&it.price!=null&&!seen[it.group]){state[active].flights[it.group]=idx;seen[it.group]=true}
+ });
+ renderDetails();renderSummary();
+}
+selectPackage(0);
+</script>
+</body>
+</html>
